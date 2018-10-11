@@ -3,6 +3,8 @@ node_js: node
 cache:
   directories:
   - node_modules
+env:
+  - CI=true  
 deploy:
   provider: heroku
   api_key:
@@ -10,3 +12,6 @@ deploy:
   app: blooming-badlands-62899
   on:
     repo: alexmanzo/movie-search
+
+
+

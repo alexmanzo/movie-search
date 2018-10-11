@@ -6,7 +6,7 @@ const initialState = {
 	loading: false
 }
 
-export default (state=initialState, action) => {
+export default (state = initialState, action) => {
 	if (action.type === SEARCH_MOVIE) {
 		const movie = action.movie
 		const url = 'https://api.themoviedb.org/3/search/movie?'
