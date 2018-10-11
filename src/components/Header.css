@@ -1,0 +1,25 @@
+.App-logo {
+  width: 20vmin;
+  height: auto;
+  padding-left: 5vmin;
+}
+
+.App-header {
+  background-color: #081c24;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .App-logo {
+      width: 90vmin;
+      height: 20vmin;
+      padding: 3vmin 0 3vmin 0;
+    }
+
+    .App-header {
+      justify-content: center;
+    }
+}
