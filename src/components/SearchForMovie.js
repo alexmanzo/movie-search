@@ -24,7 +24,7 @@ export class SearchForMovie extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    navItems: state.searchMovie.results
+    results: state.searchMovie.results
 })
 
 export default connect(mapStateToProps)(SearchForMovie)
