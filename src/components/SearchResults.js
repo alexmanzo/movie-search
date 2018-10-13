@@ -1,17 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-export function SearchResults(props) {
+export default function SearchResults(props) {
+
+	const results = props.searchResults.map((movie, index) => (
+			<li key={index}>
+				{movie.original_title}
+			</li>
+		))
+
 	return (
-		<ul>
-			<li>placeholder</li>
+		<ul id="results">
+			{results}
 		</ul>
 	)
 }
 
-const mapStateToProps = state => ({
-    results: state.searchMovie.results
-})
 
-export default connect(mapStateToProps)(SearchResults)
+
+
 		

@@ -1,30 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { searchMovie } from '../actions/searchMovie';
+import React from 'react'
 
-export class SearchForMovie extends React.Component {
-  onSubmit(e) {
-    e.preventDefault()
+export default class SearchForMovie extends React.Component {
 
-    const userInput = this.input.value
-	this.props.dispatch(searchMovie(userInput))
+    onSubmit(e) {
+        e.preventDefault()
 
-	this.input.value=''
-  }
+        if (this.props.onSearch) {
+            const userInput = this.input.value
+            this.props.onSearch(userInput)
+        }
 
-  render() {
-  	return (
-		<form onSubmit={(e) => this.onSubmit(e)}>
-			<input type="text" name="userInput" ref={input => (this.input = input)}/>
-			<button>Search</button>
-		</form>
-	)
-  }
+        this.input.value = ''
+        this.input.focus()
+    }
+
+    render() {
+        return (
+            <form onSubmit={(e) => this.onSubmit(e)}>
+              <input type="text" name="userInput" ref={input => (this.input = input)}/>
+              <button>Search</button>
+            </form>
+        )
+    }
 
 }
-
-const mapStateToProps = state => ({
-    results: state.searchMovie.results
-})
-
-export default connect(mapStateToProps)(SearchForMovie)
