@@ -17,7 +17,6 @@ export default class SearchResults extends Component {
 			</li>
         ))
 
-        console.log(this.props)
         return (
         <ul id="results">
 			{results}

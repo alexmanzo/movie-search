@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default class SearchForMovie extends React.Component {
+export default class SearchForMovie extends Component {
 
     onSubmit(e) {
         e.preventDefault()
