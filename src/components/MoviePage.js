@@ -1,23 +1,38 @@
 import React, { Component } from 'react'
+import Loading from './Loading'
 
 export default class MoviePage extends Component {
 
-	render() {
-		const posterPath = `https://image.tmdb.org/t/p/w1280/${this.props.poster_path}`
-		const altText = `${this.props.title} poster`
-		return(
-			<div>
-				<h1>{this.props.title}</h1>
-				<h2>{this.props.tagline}</h2>
+    componentDidMount() {
+        this.props.onMount(this.props.id)
+    }
+
+    render() {
+        const data = this.props.data
+        // let genres = data.genres.map((index, genre) => (
+        // 		<p key={index} id={genre.id}>genre.name</p>
+        // 	))
+        const posterPath = `https://image.tmdb.org/t/p/w1280/${data.poster_path}`
+        const altText = `${data.title} poster`
+
+        if (!data.title) {
+            return <Loading />
+        }
+
+        return (
+            <div>
+				<h1>{data.title}</h1>
+				<h2>{data.tagline}</h2>
 				<img src={posterPath} alt={altText}/>
-				<p>{this.props.budget}</p>
-				<p>{this.props.revenue}</p>
-				<p>{this.props.genres}</p>
-				<p>{this.props.overview}</p>
-				<p>{this.props.release_date}</p>
-				<p>{this.props.runtime}</p>
+				<p>{data.budget}</p>
+				<p>{data.revenue}</p>
+				<p>{data.overview}</p>
+				<p>{data.genres.map((genre, index) => (
+					<span key={index} id={genre.id}>{genre.name}, </span>
+					))}</p>
+				<p>{data.release_date}</p>
+				<p>{data.runtime}</p>
 			</div>
-		)
-	}
+        )
+    }
 }
-		
