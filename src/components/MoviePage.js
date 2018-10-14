@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
+import Cast from './Cast'
 
 export default class MoviePage extends Component {
 
-    componentDidMount() {
-        this.props.onMount(this.props.id)
-    }
-
     render() {
         const data = this.props.data
-        // let genres = data.genres.map((index, genre) => (
-        // 		<p key={index} id={genre.id}>genre.name</p>
-        // 	))
+        const castData = this.props.data.cast
         const posterPath = `https://image.tmdb.org/t/p/w1280/${data.poster_path}`
         const altText = `${data.title} poster`
 
@@ -19,19 +14,21 @@ export default class MoviePage extends Component {
             return <Loading />
         }
 
+
         return (
             <div>
 				<h1>{data.title}</h1>
 				<h2>{data.tagline}</h2>
 				<img src={posterPath} alt={altText}/>
-				<p>{data.budget}</p>
-				<p>{data.revenue}</p>
-				<p>{data.overview}</p>
-				<p>{data.genres.map((genre, index) => (
-					<span key={index} id={genre.id}>{genre.name}, </span>
+				<p>Budget: ${data.budget.toLocaleString()}</p>
+				<p>Revenue: ${data.revenue.toLocaleString()}</p>
+				<p>Plot: {data.overview}</p>
+				<p>Genres: {data.genres.map((genre, index) => (
+					<span key={index} id={genre.id}>{genre.name}</span>
 					))}</p>
-				<p>{data.release_date}</p>
-				<p>{data.runtime}</p>
+				<p>Year released: {data.release_date.substring(0,4)}</p>
+				<p>Runtime: {data.runtime} minutes</p>
+				<Cast castData={castData}/>
 			</div>
         )
     }
