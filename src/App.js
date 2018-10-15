@@ -10,7 +10,7 @@ export default class App extends Component {
         super(props)
         this.state = {
             searchResults: [],
-            movieId: 568,
+            movieId: 369972,
             moviePageVisible: true
         }
     }
@@ -54,6 +54,7 @@ export default class App extends Component {
             .then(axios.spread((details, cast, videos, recommendations, similarMovies) => {
                 this.setState({
                 	searchResults: [],
+                	movieId: details.data.id,
                     moviePageVisible: true,
                     title: details.data.original_title,
                     poster_path: details.data.poster_path,
