@@ -7,26 +7,27 @@ import Videos from "./Videos"
 
 export default class MoviePage extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         const movieId = this.props.location.pathname.slice(7)
         this.props.onMount(movieId)
     }
 
-    componentWillReceiveProps(nextProps) {
+
+    componentDidUpdate(prevProps) {  
         const currentMovieId = this.props.location.pathname.slice(7)
-        const nextMovieId = nextProps.location.pathname.slice(7)
-        if (nextMovieId !== currentMovieId) {
-            this.props.onMount(nextMovieId)
+        const prevMovieId = prevProps.location.pathname.slice(7)
+        if (prevMovieId !== currentMovieId) {
+            this.props.onMount(currentMovieId)
         }
+        window.scrollTo(0, 0)
     }
-    
 
     render() {
         const data = this.props.data
         const castData = this.props.data.cast
         const similarMovieData = this.props.data.similarMovies
         const videoData = this.props.data.videos
-
+        console.log(data)
         if (!data.title) {
             return <Loading />
         }
@@ -34,7 +35,7 @@ export default class MoviePage extends Component {
 
         return (
             <div>
-                <MovieDetails data={data}/>
+                <MovieDetails data={data} />
                 <Cast castData={castData}/>
                 <SimilarMovies similarMovieData={similarMovieData} />
                 <Videos videoData={videoData}/>

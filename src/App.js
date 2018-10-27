@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import SearchError from './components/SearchError'
+import GenreResults from './components/GenreResults'
 import Header from './components/Header'
-import SearchResults from './components/SearchResults'
 import MoviePage from './components/MoviePage'
+import SearchError from './components/SearchError'
+import SearchResults from './components/SearchResults'
 
 export default class App extends Component {
     constructor(props) {
@@ -15,15 +16,15 @@ export default class App extends Component {
     }
 
     getSearchResults(searchTerm) {
-    	this.setState({
-    		numberOfResults: 0,
-    		searcherror: []
-    	})
+        this.setState({
+            numberOfResults: 0,
+            searcherror: []
+        })
 
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8541c092938098d21b11f58a14dd114e&query=${searchTerm}`)
             .then(res => {
                 this.setState({
-                	numberOfResults: res.data.total_results,
+                    numberOfResults: res.data.total_results,
                     searchResults: res.data.results,
                     movieId: null,
                     title: null,
@@ -44,6 +45,30 @@ export default class App extends Component {
             })
     }
 
+    getMoviesByGenre(genreId) {
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en&page=1&vote_count.gte=5000&with_genres=${genreId}`)
+        .then(res => {
+            this.setState({
+                numberOfResults: res.data.total_results,
+                searchResults: res.data.results,
+                movieId: null,
+                title: null,
+                poster_path: null,
+                backdrop_path: null,
+                budget: null,
+                revenue: null,
+                genres: null,
+                overview: null,
+                tagline: null,
+                release_date: null,
+                runtime: null,
+                cast: null,
+                videos: null,
+                recommendations: null,
+                similarMovies: null
+            })
+        })
+    }
 
     getMovieById(id) {
         function getMovieDetails() {
@@ -69,6 +94,10 @@ export default class App extends Component {
 
         }
 
+        this.setState({
+            title: null
+        })
+        
         axios.all([getMovieDetails(), getMovieCast(), getVideos(), getRecommendations(), getSimilarMovies()])
             .then(axios.spread((details, cast, videos, recommendations, similarMovies) => {
                 this.setState({
@@ -89,7 +118,7 @@ export default class App extends Component {
                     recommendations: recommendations.data.results,
                     similarMovies: similarMovies.data.results
                 })
-            }))
+            }))      
     }
 
 
@@ -98,14 +127,13 @@ export default class App extends Component {
         return (
             <Router>
             <main className="App" >
-		        <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
-		        <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
-		        <Route exact path="/searcherror" component={ SearchError } />
-		        <Route exact path="/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
-	      	</main>
-	      	</Router>
+                <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
+                <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
+                <Route exact path="/searcherror" component={ SearchError } />
+                <Route exact path="/genre/:id-:name" render={ props => <GenreResults searchResults={searchResults} numberOfResults={numberOfResults} onMount={genreId => this.getMoviesByGenre(genreId)} {...props} /> } />
+                <Route exact path="/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
+            </main>
+            </Router>
         )
     }
 }
-
-
