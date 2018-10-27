@@ -27,7 +27,6 @@ export default class MoviePage extends Component {
         const castData = this.props.data.cast
         const similarMovieData = this.props.data.similarMovies
         const videoData = this.props.data.videos
-        console.log(data)
         if (!data.title) {
             return <Loading />
         }

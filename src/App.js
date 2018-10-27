@@ -21,7 +21,7 @@ export default class App extends Component {
             searcherror: []
         })
 
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8541c092938098d21b11f58a14dd114e&query=${searchTerm}`)
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8541c092938098d21b11f58a14dd114e&language=en&query=${searchTerm}`)
             .then(res => {
                 this.setState({
                     numberOfResults: res.data.total_results,
@@ -46,7 +46,7 @@ export default class App extends Component {
     }
 
     getMoviesByGenre(genreId) {
-        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en&page=1&vote_count.gte=5000&with_genres=${genreId}`)
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${genreId}`)
         .then(res => {
             this.setState({
                 numberOfResults: res.data.total_results,
@@ -72,34 +72,30 @@ export default class App extends Component {
 
     getMovieById(id) {
         function getMovieDetails() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=8541c092938098d21b11f58a14dd114e`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
         }
 
         function getMovieCast() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=8541c092938098d21b11f58a14dd114e`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
 
         }
 
         function getVideos() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=8541c092938098d21b11f58a14dd114e`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
 
-        }
-
-        function getRecommendations() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=8541c092938098d21b11f58a14dd114e`)
         }
 
         function getSimilarMovies() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=8541c092938098d21b11f58a14dd114e`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
 
         }
 
         this.setState({
             title: null
         })
-        
-        axios.all([getMovieDetails(), getMovieCast(), getVideos(), getRecommendations(), getSimilarMovies()])
-            .then(axios.spread((details, cast, videos, recommendations, similarMovies) => {
+
+        axios.all([getMovieDetails(), getMovieCast(), getVideos(), getSimilarMovies()])
+            .then(axios.spread((details, cast, videos, similarMovies) => {
                 this.setState({
                     searchResults: [],
                     movieId: details.data.id,
@@ -115,7 +111,6 @@ export default class App extends Component {
                     runtime: details.data.runtime,
                     cast: cast.data.cast,
                     videos: videos.data.results,
-                    recommendations: recommendations.data.results,
                     similarMovies: similarMovies.data.results
                 })
             }))      
