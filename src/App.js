@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Header from './components/Header'
 import SearchForMovie from './components/SearchForMovie'
 import SearchResults from './components/SearchResults'
@@ -9,9 +10,7 @@ export default class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchResults: [],
-            movieId: 369972,
-            moviePageVisible: true
+            searchResults: []
         }
     }
 
@@ -21,10 +20,24 @@ export default class App extends Component {
                 this.setState({
                     searchResults: res.data.results,
                     movieId: null,
-                    moviePageVisible: false
+                    title: null,
+                    poster_path: null,
+                    backdrop_path: null,
+                    budget: null,
+                    revenue: null,
+                    genres: null,
+                    overview: null,
+                    tagline: null,
+                    release_date: null,
+                    runtime: null,
+                    cast: null,
+                    videos: null,
+                    recommendations: null,
+                    similarMovies: null
                 })
             })
     }
+
 
     getMovieById(id) {
         function getMovieDetails() {
@@ -53,9 +66,8 @@ export default class App extends Component {
         axios.all([getMovieDetails(), getMovieCast(), getVideos(), getRecommendations(), getSimilarMovies()])
             .then(axios.spread((details, cast, videos, recommendations, similarMovies) => {
                 this.setState({
-                	searchResults: [],
-                	movieId: details.data.id,
-                    moviePageVisible: true,
+                    searchResults: [],
+                    movieId: details.data.id,
                     title: details.data.original_title,
                     poster_path: details.data.poster_path,
                     backdrop_path: details.data.backdrop_path,
@@ -74,20 +86,20 @@ export default class App extends Component {
             }))
     }
 
-    componentDidMount() {
-        this.getMovieById(this.state.movieId)
-    }
 
     render() {
         const { searchResults } = this.state
-
         return (
-            <div className="App" >
-	        <Header />
-	        <SearchForMovie onSearch={searchTerm => this.getSearchResults(searchTerm)} />
-	        <SearchResults searchResults={searchResults} onSelectMovie={id => this.getMovieById(id)} />
-	        { this.state.moviePageVisible ? <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)}/> : null }
-	      </div>
+            <Router>
+            <main className="App" >
+		        <Link to="/"><Header /></Link>
+		        <Route path="/" render={ props => <SearchForMovie onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
+		        <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
+		        <Route exact path="/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
+	      	</main>
+	      	</Router>
         )
     }
 }
+
+

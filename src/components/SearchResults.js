@@ -1,28 +1,35 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Link } from 'react-router-dom'
 
 export default class SearchResults extends Component {
 
-	handleClick(e, id) {
-		e.preventDefault()
+    // handleClick(e, id) {
+    //     e.preventDefault()
 
-        if (this.props.onSelectMovie) {
-            this.props.onSelectMovie(id)
-        }
-    }
+    //     this.props.history.push(`/movie/${id}`)
+    // }
+    //key={ index } onClick={ (e, id) => this.handleClick(e, movie.id) }
 
     render() {
         const results = this.props.searchResults.map((movie, index) => (
-            <li key={index}>
-				<button onClick={(e, id) => this.handleClick(e, movie.id)}>{movie.original_title}</button>
-			</li>
+            
+            <div key ={index}>
+
+                <img src={`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`} alt={movie.original_title} />
+                <h4>{movie.original_title}</h4>
+                <h5>{movie.release_date.substring(0,4)}</h5>
+             
+            </div>
+            
+
+
         ))
 
         return (
-        <ul id="results">
-			{results}
-		</ul>
+        <section id="results">
+            {results}
+        </section>
         )
     }
 
 }
-
