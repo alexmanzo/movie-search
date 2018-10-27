@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import SearchError from './components/SearchError'
 import Header from './components/Header'
-import SearchForMovie from './components/SearchForMovie'
 import SearchResults from './components/SearchResults'
 import MoviePage from './components/MoviePage'
 
@@ -15,9 +15,15 @@ export default class App extends Component {
     }
 
     getSearchResults(searchTerm) {
+    	this.setState({
+    		numberOfResults: 0,
+    		searcherror: []
+    	})
+
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8541c092938098d21b11f58a14dd114e&query=${searchTerm}`)
             .then(res => {
                 this.setState({
+                	numberOfResults: res.data.total_results,
                     searchResults: res.data.results,
                     movieId: null,
                     title: null,
@@ -88,13 +94,13 @@ export default class App extends Component {
 
 
     render() {
-        const { searchResults } = this.state
+        const { searchResults, numberOfResults } = this.state
         return (
             <Router>
             <main className="App" >
-		        <Link to="/"><Header /></Link>
-		        <Route path="/" render={ props => <SearchForMovie onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
-		        <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
+		        <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
+		        <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
+		        <Route exact path="/searcherror" component={ SearchError } />
 		        <Route exact path="/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
 	      	</main>
 	      	</Router>
