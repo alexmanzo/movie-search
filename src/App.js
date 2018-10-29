@@ -156,7 +156,7 @@ export default class App extends Component {
         return (
             <Router>
             <main className="App" >
-                <Route path="/movie-search" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
+                <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
                 <Route exact path="/movie-search/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
                 <Route exact path="/movie-search/searcherror" component={ SearchError } />
                 <Route exact path="/movie-search/genre/:id-:name" render={ props => <GenreResults searchResults={searchResults} numberOfResults={numberOfResults} onMount={genreId => this.getMoviesByGenre(genreId)} {...props} /> } />
