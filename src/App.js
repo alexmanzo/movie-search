@@ -157,11 +157,11 @@ export default class App extends Component {
             <Router>
             <main className="App" >
                 <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
-                <Route exact path="/movie-search/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
-                <Route exact path="/movie-search/searcherror" component={ SearchError } />
-                <Route exact path="/movie-search/genre/:id-:name" render={ props => <GenreResults searchResults={searchResults} numberOfResults={numberOfResults} onMount={genreId => this.getMoviesByGenre(genreId)} {...props} /> } />
-                <Route exact path="/movie-search/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
-                <Route exact path="/movie-search/cast/:id-:name" render={ props => <CastProfile filmography={ filmography } bioData={ this.state } onMount={id => this.getCastProfile(id)} {...props}/> } />
+                <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
+                <Route exact path="/searcherror" component={ SearchError } />
+                <Route exact path="/genre/:id-:name" render={ props => <GenreResults searchResults={searchResults} numberOfResults={numberOfResults} onMount={genreId => this.getMoviesByGenre(genreId)} {...props} /> } />
+                <Route exact path="/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
+                <Route exact path="/cast/:id-:name" render={ props => <CastProfile filmography={ filmography } bioData={ this.state } onMount={id => this.getCastProfile(id)} {...props}/> } />
             </main>
             </Router>
         )

@@ -8,14 +8,14 @@ import Videos from "./Videos"
 export default class MoviePage extends Component {
 
     componentDidMount() {
-        const movieId = this.props.location.pathname.slice(20)
+        const movieId = this.props.location.pathname.slice(7)
         this.props.onMount(movieId)
     }
 
 
     componentDidUpdate(prevProps) {  
-        const currentMovieId = this.props.location.pathname.slice(20)
-        const prevMovieId = prevProps.location.pathname.slice(20)
+        const currentMovieId = this.props.location.pathname.slice(7)
+        const prevMovieId = prevProps.location.pathname.slice(7)
         if (prevMovieId !== currentMovieId) {
             this.props.onMount(currentMovieId)
         }

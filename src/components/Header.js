@@ -15,7 +15,7 @@ export default class Header extends Component {
                 const userInput = this.input.value
                 this.props.onSearch(userInput)
             }
-            this.props.history.push('/movie-search/results')
+            this.props.history.push('/results')
 
             this.input.value = ''
             this.input.focus()
@@ -26,7 +26,7 @@ export default class Header extends Component {
     render() {
         return (
             <header className="App-header">
-                <Link to="/movie-search"><img src={logo} className="App-logo" alt="logo" /></Link>
+                <Link to=""><img src={logo} className="App-logo" alt="logo" /></Link>
                 <form onSubmit={(e) => this.onSubmit(e)}>
                     <input type="text" name="userInput" ref={input => (this.input = input)}/>
                     <button>Search</button>

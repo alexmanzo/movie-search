@@ -17,7 +17,7 @@ export default class movieDetails extends Component {
 				<p>Revenue: ${movieData.revenue.toLocaleString()}</p>
 				<p>Plot: {movieData.overview}</p>
 				<div>Genres: {movieData.genres.map((genre, index) => (
-					<Link key={index} to={`/movie-search/genre/${genre.id}-${genre.name}`}>{genre.name}</Link>
+					<Link key={index} to={`/genre/${genre.id}-${genre.name}`}>{genre.name}</Link>
 					))}</div>
 				<p>Year released: {movieData.release_date.substring(0,4)}</p>
 				<p>Runtime: {movieData.runtime} minutes</p>
