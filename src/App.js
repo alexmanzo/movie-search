@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import CastProfile from './components/CastProfile'
 import GenreResults from './components/GenreResults'
 import Header from './components/Header'
 import MoviePage from './components/MoviePage'
@@ -75,6 +76,34 @@ export default class App extends Component {
         })
     }
 
+    getCastProfile(castId) {
+        this.setState({
+            castName: null
+        })
+
+        function getFilmography() {
+            return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&with_cast=${castId}&with_original_language=en`)
+        }
+
+        function getBio() {
+            return axios.get(`https://api.themoviedb.org/3/person/${castId}?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
+        }
+
+        axios.all([getFilmography(), getBio()])
+            .then(axios.spread((filmography, bio) => {
+                this.setState({
+                    numberOfResults: filmography.data.total_results,
+                    filmography: filmography.data.results,
+                    castId: bio.data.id,
+                    birthday: bio.data.birthday,
+                    deathday: bio.data.deathday,
+                    castName: bio.data.name,
+                    bio: bio.data.biography,
+                    castPhoto_path: bio.data.profile_path
+                })
+            }))
+    }
+
     getMovieById(id) {
         function getMovieDetails() {
             return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
@@ -123,7 +152,7 @@ export default class App extends Component {
 
 
     render() {
-        const { searchResults, numberOfResults } = this.state
+        const { searchResults, numberOfResults, filmography } = this.state
         return (
             <Router>
             <main className="App" >
@@ -132,6 +161,7 @@ export default class App extends Component {
                 <Route exact path="/movie-search/searcherror" component={ SearchError } />
                 <Route exact path="/movie-search/genre/:id-:name" render={ props => <GenreResults searchResults={searchResults} numberOfResults={numberOfResults} onMount={genreId => this.getMoviesByGenre(genreId)} {...props} /> } />
                 <Route exact path="/movie-search/movie/:id" render={ props => <MoviePage data={this.state} id={this.state.movieId} onMount={id => this.getMovieById(id)} {...props}/> } />
+                <Route exact path="/movie-search/cast/:id-:name" render={ props => <CastProfile filmography={ filmography } bioData={ this.state } onMount={id => this.getCastProfile(id)} {...props}/> } />
             </main>
             </Router>
         )
