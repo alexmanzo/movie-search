@@ -154,7 +154,7 @@ export default class App extends Component {
     render() {
         const { searchResults, numberOfResults, filmography } = this.state
         return (
-            <Router>
+            <Router basename="/movie-search">
             <main className="App" >
                 <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
                 <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
