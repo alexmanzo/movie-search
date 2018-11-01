@@ -28,7 +28,6 @@ export default class Header extends Component {
 
             // Reset input
             this.input.value = ''
-            this.input.focus()
 
         }
     }

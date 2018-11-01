@@ -76,7 +76,7 @@ input:focus~label {
     height: 0.25vmin;
     width: 0;
     position: absolute;
-    background: #fff;
+    background: #01d277;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
