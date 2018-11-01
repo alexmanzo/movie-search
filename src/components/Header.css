@@ -5,6 +5,14 @@
     margin-top: 1vmin;
 }
 
+.logo-link:focus {
+  outline: none;
+}
+
+.logo-link:focus, .logo-link:hover > img {
+  filter: brightness(300%);
+}
+
 .App-header {
     background-color: #081c24;
     display: flex;
@@ -14,7 +22,7 @@
 /* Search Form */
 .search-form {
     position: relative;
-    margin-top: 5vmin;
+    margin-top: 7.5vmin;
     display: block;
 }
 
@@ -68,7 +76,7 @@ input:focus~label {
     height: 0.25vmin;
     width: 0;
     position: absolute;
-    background: #01d277;
+    background: #fff;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
@@ -108,6 +116,7 @@ button {
 
 button:focus {
     outline: none;
+    color: #fff;
     border: 2px solid #ffff;
 }
 
