@@ -1,25 +1,166 @@
 .App-logo {
-  width: 20vmin;
-  height: auto;
-  padding-left: 5vmin;
+    width: 15vmin;
+    height: auto;
+    padding-left: 5vmin;
+    margin-top: 1vmin;
 }
 
 .App-header {
-  background-color: #081c24;
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
+    background-color: #081c24;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Search Form */
+.search-form {
+    position: relative;
+    margin-top: 5vmin;
+    display: block;
+}
+
+input {
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 1vmin 1vmin 1vmin 1vmin;
+    width: 30vmin;
+    border: none;
+    border-bottom: 1px solid #01d277;
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Label */
+label {
+    color: #edfff7;
+    font-style: italic;
+    font-size: 18px;
+    opacity: 0.5;
+    position: absolute;
+    top: 1.5vmin;
+    transition: 0.2s ease all;
+    pointer-events: none;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/* Label Active State */
+input:focus~label {
+    top: -2vmin;
+    font-style: normal;
+    opacity: 1.0;
+    font-size: 14px;
+    color: #ffff;
+}
+
+/* Bottom Bar */
+.search-bar {
+    position: relative;
+    display: block;
+    width: 32vmin;
+}
+
+.search-bar:before,
+.search-bar:after {
+    content: '';
+    height: 0.25vmin;
+    width: 0;
+    position: absolute;
+    background: #01d277;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.search-bar:before {
+    left: 50%;
+}
+
+.search-bar:after {
+    right: 50%;
+}
+
+/* Bottom Bar Active State */
+input:focus~.search-bar:before,
+input:focus~.search-bar:after {
+    width: 50%;
+}
+
+/* Button */
+
+button {
+    position: absolute;
+    border: 2px solid #01d277;
+    border-radius: 1vmin;
+    font-size: 18px;
+    padding: 0 2vmin 0 2vmin;
+    left: 33vmin;
+    top: 1.7vmin;
+    background-color: transparent;
+    color: #01d277;
+    overflow: hidden;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+button:focus {
+    outline: none;
+    border: 2px solid #ffff;
+}
+
+button:after {
+    content: '\279e';
+}
+
+button:hover {
+    background-color: #01d277;
+    color: #081c24;
+}
+
+button:active {
+    background-color: #ffff;
+    color: #081c24;
 }
 
 
+/* Media Queries */
 @media only screen and (max-width: 600px) {
     .App-logo {
-      width: 90vmin;
-      height: 20vmin;
-      padding: 3vmin 0 3vmin 0;
+        width: 50vmin;
+        height: 50vmin;
+        margin: 5vmin 22vmin 0 17vmin;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        margin: -4vmin 15vmin 3vmin 15vmin;
     }
 
     .App-header {
-      justify-content: center;
+        display: flex;
+        flex-direction: column;
     }
+
+    input {
+        font-size: 18px;
+        padding: 3vmin 1vmin 1vmin 1vmin;
+        width: 50vmin;
+
+    }
+
+    .search-bar {
+        width: 52vmin;
+    }
+
+    button {
+        padding: 0 3vmin 0 3vmin;
+        left: 54vmin;
+        top: 3vmin;
+    }
+
+
 }

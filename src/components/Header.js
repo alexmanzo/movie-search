@@ -37,9 +37,11 @@ export default class Header extends Component {
         return (
             <header className="App-header">
                 <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
-                <form onSubmit={ e => this.onSubmit(e) }>
-                    <input type="text" name="userInput" ref={ input => (this.input = input) }/>
-                    <button>Search</button>
+                <form className="search-form" onSubmit={ e => this.onSubmit(e) }>
+                    <input type="text" name="userInput" ref={ input => (this.input = input) } />
+                    <span className="search-bar"></span>
+                    <label htmlFor="userInput">Enter a movie title...</label>
+                    <button></button>
                 </form>
             </header>
         )
