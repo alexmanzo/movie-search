@@ -1,9 +1,16 @@
-.App-logo {
-    width: 15vmin;
-    height: auto;
-    padding-left: 5vmin;
-    margin-top: 1vmin;
+.App-header {
+    background-color: #081c24;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 2%;
+    padding-left: 5%;
 }
+
+.App-logo {
+    width: 150px;
+}
+
 
 .logo-link:focus {
   outline: none;
@@ -13,25 +20,17 @@
   filter: brightness(300%);
 }
 
-.App-header {
-    background-color: #081c24;
-    display: flex;
-    flex-direction: row;
-}
-
 /* Search Form */
 .search-form {
     position: relative;
-    margin-top: 7.5vmin;
-    display: block;
 }
 
 input {
     background-color: transparent;
     color: #ffffff;
     font-size: 18px;
-    padding: 1vmin 1vmin 1vmin 1vmin;
-    width: 30vmin;
+    padding: 10px 10px 10px 10px;
+    width: 350px;
     border: none;
     border-bottom: 1px solid #01d277;
 }
@@ -47,7 +46,8 @@ label {
     font-size: 18px;
     opacity: 0.5;
     position: absolute;
-    top: 1.5vmin;
+    top: 15px;
+    left: 10px;
     transition: 0.2s ease all;
     pointer-events: none;
     -moz-transition: 0.2s ease all;
@@ -56,7 +56,8 @@ label {
 
 /* Label Active State */
 input:focus~label {
-    top: -2vmin;
+    top: -17px;
+    left: 0px;
     font-style: normal;
     opacity: 1.0;
     font-size: 14px;
@@ -67,13 +68,13 @@ input:focus~label {
 .search-bar {
     position: relative;
     display: block;
-    width: 32vmin;
+    width: 100%;
 }
 
 .search-bar:before,
 .search-bar:after {
     content: '';
-    height: 0.25vmin;
+    height: 2px;
     width: 0;
     position: absolute;
     background: #01d277;
@@ -101,14 +102,13 @@ input:focus~.search-bar:after {
 button {
     position: absolute;
     border: 2px solid #01d277;
-    border-radius: 1vmin;
+    border-radius: 10px;
     font-size: 18px;
-    padding: 0 2vmin 0 2vmin;
-    left: 33vmin;
-    top: 1.7vmin;
+    padding: 0 5% 0 5%;
+    left: 380px;
+    top: 18px;
     background-color: transparent;
     color: #01d277;
-    overflow: hidden;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
@@ -137,38 +137,31 @@ button:active {
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
-    .App-logo {
-        width: 50vmin;
-        height: 50vmin;
-        margin: 5vmin 22vmin 0 17vmin;
-    }
-
-    .search-form {
-        display: flex;
-        flex-direction: column;
-        margin: -4vmin 15vmin 3vmin 15vmin;
-    }
-
     .App-header {
         display: flex;
         flex-direction: column;
+        padding-top: 15px;
+    }
+
+    .App-logo {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .search-form {
+        margin-left: -45px;
     }
 
     input {
         font-size: 18px;
-        padding: 3vmin 1vmin 1vmin 1vmin;
-        width: 50vmin;
+        width: 200px;
 
-    }
-
-    .search-bar {
-        width: 52vmin;
     }
 
     button {
-        padding: 0 3vmin 0 3vmin;
-        left: 54vmin;
-        top: 3vmin;
+        padding: 0 15px 0 15px;
+        left: 225px;
+        top: 16px;
     }
 
 
