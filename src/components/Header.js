@@ -33,14 +33,15 @@ export default class Header extends Component {
     }
 
     render() {
+
         return (
             <header className="App-header">
-                <Link to="/" className="logo-link"><img src={logo} className="App-logo" alt="logo" /></Link>
+                <Link to="/movie/369972" className="logo-link"><img src={logo} className="App-logo" alt="logo" /></Link>
                 <form className="search-form" onSubmit={ e => this.onSubmit(e) }>
                     <input type="text" name="userInput" ref={ input => (this.input = input) } />
                     <span className="search-bar"></span>
                     <label htmlFor="userInput">Enter a movie title...</label>
-                    <button></button>
+                    <button className="search-button"></button>
                 </form>
                 <hr />
             </header>

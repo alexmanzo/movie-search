@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
 import MovieDetails from './MovieDetails'
-import MoviePlot from './MoviePlot'
 import SimilarMovies from './SimilarMovies'
 import Cast from './Cast'
 import Videos from './Videos'
@@ -14,7 +13,6 @@ export default class MoviePage extends Component {
         const path = this.props.location.pathname
         const movieId = path.slice(7)
         this.props.onMount(movieId)
-
     }
 
     // If navigating from movie page to movie page, allows component to reset.

@@ -7,6 +7,7 @@
     flex-direction: column;
 }
 
+/* Movie Details */
 h4 {
     font-style: italic;
     margin-top: -15px;
@@ -26,8 +27,8 @@ h4 {
     margin-right: 30px;
     border-radius: 10px;
     border: 1px solid #fff;
+    background-color: #cbcbcb;
 }
-
 
 .movie-data {
     display: flex;
@@ -60,6 +61,42 @@ h4 {
 
 .genre-link>a:active {
     color: #fff;
+}
+
+/* Cast */
+.cast-list {
+	background-color: red;
+}
+
+
+.cast-container {
+	background-color: #01d277;
+	overflow: hidden;
+	height: 40vh;
+}
+
+.cast-photo {
+	height: 75%;
+}
+
+.cast-nophoto { 
+	height: 75%;
+	background-color: #cbcbcb;
+}
+
+
+.cast-container>a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.actor, .character {
+	padding-left: 10px;
+}
+
+.actor {
+	font-weight: bold;
+	margin-bottom: -10px;
 }
 
 li>a {

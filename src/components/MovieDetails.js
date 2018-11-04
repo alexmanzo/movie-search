@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import nophoto from '../nophoto.svg'
 
 export default class movieDetails extends Component {
 
@@ -11,7 +12,7 @@ export default class movieDetails extends Component {
         return (
 
             <div className="movie">
-				{ (movieData.poster_path === null) ? (<img className="movie-page-poster" src={'https://secure.hmepowerweb.com/Resources/Images/NoImageAvailableLarge.jpg'} alt='no poster found' />) : (<img className="movie-page-poster" src={`https://image.tmdb.org/t/p/w1280/${movieData.poster_path}`} alt={movieData.original_title} />) }
+				{ (movieData.poster_path === null) ? (<img className="movie-page-poster" src={nophoto} alt='no poster found' />) : (<img className="movie-page-poster" src={`https://image.tmdb.org/t/p/w1280/${movieData.poster_path}`} alt={movieData.original_title} />) }
 					<div className="movie-data">
 						<div className="movie-headline">
 							<h1>{movieData.title} ({movieData.release_date.substring(0,4)})</h1>

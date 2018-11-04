@@ -36,7 +36,7 @@
 
 .results-no-poster {
     width: 25%;
-    opacity: 0.8;
+    background-color: #cbcbcb;
 }
 
 .movie-card > a {

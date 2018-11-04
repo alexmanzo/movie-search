@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import CastProfile from './components/CastProfile'
 import GenreResults from './components/GenreResults'
 import Header from './components/Header'
@@ -26,6 +26,9 @@ export default class App extends Component {
             searchResults: []
         })
 
+        // Remove movie-specific background image
+        document.body.style.backgroundImage = ''
+
         // AJAX call searching via movie title.
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8541c092938098d21b11f58a14dd114e&language=en&query=${searchTerm}`)
             .then(res => {
@@ -37,20 +40,23 @@ export default class App extends Component {
     }
 
     getMoviesByGenre(genreId) {
-        
+
         // Reset state before AJAX call. Prevents page loading with what was in component previously before displaying new content.
         this.setState({
             numberOfResults: 0
         })
 
+        // Remove movie-specific background image
+        document.body.style.backgroundImage = ''
+
         // AJAX searching movies by genre. Returns movies with >5000 votes on TMDb sorted by vote average 
         axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${genreId}`)
-        .then(res => {
-            this.setState({
-                numberOfResults: res.data.total_results,
-                searchResults: res.data.results,
+            .then(res => {
+                this.setState({
+                    numberOfResults: res.data.total_results,
+                    searchResults: res.data.results,
+                })
             })
-        })
     }
 
     getCastProfile(castId) {
@@ -59,6 +65,9 @@ export default class App extends Component {
         this.setState({
             castName: null
         })
+
+        // Remove movie-specific background image
+        document.body.style.backgroundImage = ''
 
         // AJAX searching by cast ID. Returns movie they appeared in sorted by release date (newest => oldset)
         function getFilmography() {
@@ -112,7 +121,7 @@ export default class App extends Component {
         })
 
         axios.all([getMovieDetails(), getMovieCast(), getVideos(), getSimilarMovies()])
-            .then(axios.spread( (details, cast, videos, similarMovies) => {
+            .then(axios.spread((details, cast, videos, similarMovies) => {
                 this.setState({
                     searchResults: [],
                     movieId: details.data.id,
@@ -130,8 +139,8 @@ export default class App extends Component {
                     videos: videos.data.results,
                     similarMovies: similarMovies.data.results
                 })
-               document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}` 
-            }))      
+                document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
+            }))
     }
 
 
@@ -140,6 +149,7 @@ export default class App extends Component {
         return (
             <Router basename="/movie-search">
             <main className="App" >
+                <Route exact path="/" render={ location => (location.pathname === window.location.pathname) ? (<Redirect to="/movie/369972" />) : null } />
                 <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
                 <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
                 <Route exact path="/searcherror" component={ SearchError } />
