@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
 import MovieDetails from './MovieDetails'
+import MoviePlot from './MoviePlot'
 import SimilarMovies from './SimilarMovies'
 import Cast from './Cast'
-import Videos from "./Videos"
+import Videos from './Videos'
+import './MoviePage.css'
 
 export default class MoviePage extends Component {
 
     // Pulls movieID from Router path and calls getCastProfile() in App.js
     componentDidMount() {
-
         const path = this.props.location.pathname
         const movieId = path.slice(7)
         this.props.onMount(movieId)
+
     }
 
     // If navigating from movie page to movie page, allows component to reset.
@@ -45,7 +47,7 @@ export default class MoviePage extends Component {
         }
 
         return (
-            <div>
+            <div className="movie-container">
                 <MovieDetails data={ data } />
                 <Cast castData={ castData }/>
                 <SimilarMovies similarMovieData={ similarMovieData } />

@@ -1,3 +1,4 @@
+
 #results>p {
     margin-left: 100px;
 }
@@ -38,12 +39,12 @@
     opacity: 0.8;
 }
 
-a {
+.movie-card > a {
     text-decoration: none;
     color: #fff;
 }
 
-a:hover {
+.movie-card:hover > a {
     color: #081c24;
 }
 

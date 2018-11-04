@@ -1,5 +1,4 @@
 .App-header {
-    background-color: #081c24;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -13,11 +12,20 @@
 
 
 .logo-link:focus {
-  outline: none;
+    outline: none;
 }
 
-.logo-link:focus, .logo-link:hover > img {
-  filter: brightness(300%);
+.logo-link:focus,
+.logo-link:hover>img {
+    filter: brightness(300%);
+}
+
+hr {
+    border: 1px solid #01d277;
+    width: 90%;
+    position: absolute;
+    margin-top: 75px;
+    margin-bottom: 75px;
 }
 
 /* Search Form */
@@ -38,6 +46,8 @@ input {
 input:focus {
     outline: none;
 }
+
+
 
 /* Label */
 label {
@@ -162,6 +172,10 @@ button:active {
         padding: 0 15px 0 15px;
         left: 225px;
         top: 16px;
+    }
+
+    hr {
+        display: none;
     }
 
 

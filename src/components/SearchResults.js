@@ -10,7 +10,7 @@ export default class SearchResults extends Component {
         if (this.props.numberOfResults === 0) {
             return <Loading />
         }
-        
+
         const results = this.props.searchResults.map((movie, index) => (
             <div className="movie-card" key={index}>
                 <Link to={`/movie/${movie.id}`}>

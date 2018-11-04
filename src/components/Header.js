@@ -42,6 +42,7 @@ export default class Header extends Component {
                     <label htmlFor="userInput">Enter a movie title...</label>
                     <button></button>
                 </form>
+                <hr />
             </header>
         )
     }
