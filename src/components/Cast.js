@@ -18,9 +18,35 @@ export default class Cast extends Component {
 
 
         const settings = {
+            className: 'cast-list',
             speed: 1000,
-            slidesToShow: 4,
-            slidesToScroll: 4
+            slidesToShow: 5,
+            slidesToScroll: 4,
+            responsive: [{
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                        infinite: true
+                    }
+                },
+                {
+                    breakpoint: 800,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                },
+                {
+                    breakpoint: 400,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                }
+            ]
         };
                 
 
