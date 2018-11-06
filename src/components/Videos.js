@@ -6,7 +6,7 @@ export default class Videos extends Component {
         const videos = this.props.videoData.map((video, index) => {
                 const url = `https://www.youtube.com/embed/${video.key}`
                 return (
-                <div key={index}>
+                <div className="video-container" key={index}>
                     <p>{video.name}</p>
                     <iframe 
                     title={video.name}
@@ -21,9 +21,9 @@ export default class Videos extends Component {
         })
 
         return (    
-            <ul>
+            <div className="video-list">
                 {videos}
-			</ul>
+			</div>
         )
     }
 }

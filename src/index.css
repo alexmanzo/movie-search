@@ -17,8 +17,7 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
-
-
+ 
 #outer-container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 1) 100%);
     background-attachment: scroll;
@@ -26,17 +25,8 @@ code {
     height: 120vh;
 }
 
+
 .App {
     animation: fadein ease-out 1.4s;
 }
 
-@media only screen and (max-width: 600px) {
-
-    body {
-        background-size: 100vmax;
-    }
-
-    #outer-container {
-        width: 100vmax;
-    }
-}

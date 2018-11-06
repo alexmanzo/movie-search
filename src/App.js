@@ -139,7 +139,11 @@ export default class App extends Component {
                     videos: videos.data.results,
                     similarMovies: similarMovies.data.results
                 })
-                document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
+                console.log(window.innerWidth)
+                if (window.innerWidth > 900) {
+                    document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
+                }
+
             }))
     }
 

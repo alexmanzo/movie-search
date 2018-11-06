@@ -7,11 +7,11 @@ export default class Cast extends Component {
 
     render() {
         const cast = this.props.castData.map((cast, index) => (
-        <div key={index} className="cast-container">
+            <div key={index} className="cast-container">
             <Link to={`/cast/${cast.id}-${cast.name}`}>
-            { (cast.profile_path === null) ? (<img className="cast-nophoto" src={nophoto} alt='no profile found' />) : (<img className="cast-photo" src={`https://image.tmdb.org/t/p/w1280/${cast.profile_path}`} alt={cast.name} />) }
-            <p className="actor">{cast.name}</p>
-            <p className="character">{cast.character}</p>
+                { (cast.profile_path === null) ? (<img className="cast-nophoto" src={nophoto} alt='no profile found' />) : (<img className="cast-photo" src={`https://image.tmdb.org/t/p/w1280/${cast.profile_path}`} alt={cast.name} />) }
+                <p className="actor">{cast.name}</p>
+                <p className="character">{cast.character}</p>
             </Link> 
         </div>
         ))
@@ -20,10 +20,19 @@ export default class Cast extends Component {
         const settings = {
             className: 'cast-list',
             speed: 1000,
-            slidesToShow: 5,
+            slidesToShow: 6,
             slidesToScroll: 4,
             responsive: [{
-                    breakpoint: 1200,
+                    breakpoint: 1550,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                },
+
+                {
+                    breakpoint: 1300,
                     settings: {
                         slidesToShow: 4,
                         slidesToScroll: 4,
@@ -31,15 +40,15 @@ export default class Cast extends Component {
                     }
                 },
                 {
-                    breakpoint: 800,
+                    breakpoint: 900,
                     settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
                         infinite: true
                     }
                 },
                 {
-                    breakpoint: 400,
+                    breakpoint: 600,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
@@ -48,9 +57,9 @@ export default class Cast extends Component {
                 }
             ]
         };
-                
 
-        return (  
+
+        return (
             <Slider {...settings}>
              {cast}
             </Slider>
