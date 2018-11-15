@@ -17,6 +17,12 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
+
+h4 {
+    font-style: italic;
+    margin-top: -15px;
+}
+
  
 #outer-container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 1) 100%);

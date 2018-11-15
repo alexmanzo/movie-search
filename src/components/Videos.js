@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Slider from "react-slick"
 
 export default class Videos extends Component {
 
@@ -7,7 +8,6 @@ export default class Videos extends Component {
                 const url = `https://www.youtube.com/embed/${video.key}`
                 return (
                 <div className="video-container" key={index}>
-                    <p>{video.name}</p>
                     <iframe 
                     title={video.name}
                     id="ytplayer"
@@ -16,13 +16,24 @@ export default class Videos extends Component {
                     src= {url}
                     frameBorder="0">
                     </iframe>
+                    <p>{video.name}</p>
                 </div>
                 )
         })
 
+        const settings = {
+            className: 'video-list',
+            speed: 1000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+        }
+
         return (    
-            <div className="video-list">
-                {videos}
+            <div>
+                <h2>Trailers & Videos</h2>
+                <Slider {...settings}>
+                    {videos}
+                </Slider>
 			</div>
         )
     }

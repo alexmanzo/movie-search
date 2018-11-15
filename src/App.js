@@ -139,7 +139,7 @@ export default class App extends Component {
                     videos: videos.data.results,
                     similarMovies: similarMovies.data.results
                 })
-                console.log(window.innerWidth)
+
                 if (window.innerWidth > 900) {
                     document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
                 }
@@ -153,7 +153,7 @@ export default class App extends Component {
         return (
             <Router basename="/movie-search">
             <main className="App" >
-                <Route exact path="/" render={ location => (location.pathname === window.location.pathname) ? (<Redirect to="/movie/369972" />) : null } />
+                <Route exact path="/" render={ location => (location.pathname === window.location.pathname) ? null : (<Redirect to="/movie/369972" />) } />
                 <Route path="/" render={ props => <Header onSearch={searchTerm => this.getSearchResults(searchTerm)} {...props}/> } />
                 <Route exact path="/results" render={ props => <SearchResults searchResults={searchResults} numberOfResults={numberOfResults} onSelectMovie={id => this.getMovieById(id)} {...props}/> } />
                 <Route exact path="/searcherror" component={ SearchError } />

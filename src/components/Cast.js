@@ -7,7 +7,7 @@ export default class Cast extends Component {
 
     render() {
         const cast = this.props.castData.map((cast, index) => (
-            <div key={index} className="cast-container">
+        <div key={index} className="cast-container">
             <Link to={`/cast/${cast.id}-${cast.name}`}>
                 { (cast.profile_path === null) ? (<img className="cast-nophoto" src={nophoto} alt='no profile found' />) : (<img className="cast-photo" src={`https://image.tmdb.org/t/p/w1280/${cast.profile_path}`} alt={cast.name} />) }
                 <p className="actor">{cast.name}</p>
@@ -18,21 +18,12 @@ export default class Cast extends Component {
 
 
         const settings = {
-            className: 'cast-list',
+            className: 'slider-list',
             speed: 1000,
-            slidesToShow: 6,
+            slidesToShow: 5,
             slidesToScroll: 4,
             responsive: [{
-                    breakpoint: 1550,
-                    settings: {
-                        slidesToShow: 5,
-                        slidesToScroll: 1,
-                        infinite: true
-                    }
-                },
-
-                {
-                    breakpoint: 1300,
+                    breakpoint: 1350,
                     settings: {
                         slidesToShow: 4,
                         slidesToScroll: 4,
@@ -48,7 +39,7 @@ export default class Cast extends Component {
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 650,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
@@ -60,9 +51,12 @@ export default class Cast extends Component {
 
 
         return (
-            <Slider {...settings}>
-             {cast}
-            </Slider>
+            <div className="cast">
+                <h2>Cast</h2>
+                <Slider {...settings}>
+                    {cast}
+                </Slider>
+            </div>
         )
     }
 }
