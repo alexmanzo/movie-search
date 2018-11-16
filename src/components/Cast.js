@@ -33,13 +33,13 @@ export default class Cast extends Component {
                 {
                     breakpoint: 900,
                     settings: {
-                        slidesToShow: 2,
+                        slidesToShow: 3,
                         slidesToScroll: 2,
                         infinite: true
                     }
                 },
                 {
-                    breakpoint: 650,
+                    breakpoint: 450,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,

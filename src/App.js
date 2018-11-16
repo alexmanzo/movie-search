@@ -140,7 +140,7 @@ export default class App extends Component {
                     similarMovies: similarMovies.data.results
                 })
 
-                if (window.innerWidth > 900) {
+                if (window.innerWidth > 910) {
                     document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
                 }
 

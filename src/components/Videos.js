@@ -29,7 +29,7 @@ export default class Videos extends Component {
         }
 
         return (    
-            <div>
+            <div className="videos">
                 <h2>Trailers & Videos</h2>
                 <Slider {...settings}>
                     {videos}
