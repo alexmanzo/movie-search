@@ -179,5 +179,25 @@ input:focus~.search-bar:after {
         display: none;
     }
 
+}
+
+/* iPhone 4, 5, SE Landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    .App-logo {
+        width: 35vw;
+        margin-left: 5%;
+        margin-right: 10%;
+    }
+
+    input {
+        width: 250px;
+
+    }
+
+    .search-button {
+
+        left: 275px;
+
+    }
 
 }

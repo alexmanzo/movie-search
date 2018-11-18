@@ -31,7 +31,7 @@ export default class SimilarMovies extends Component {
                 {
                     breakpoint: 900,
                     settings: {
-                        slidesToShow: 2,
+                        slidesToShow: 3,
                         slidesToScroll: 2,
                         infinite: true
                     }
