@@ -3,7 +3,7 @@
 .movie-container {
     padding: 0 5% 0 5%;
     min-width: 850px;
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
     height: 45vh;
     margin-top: 30px;
     margin-bottom: 25px;
-    overflow: visible;
+    overflow: auto;
 }
 
 .movie-page-poster {
@@ -86,6 +86,12 @@
     margin-left: 15px;
 }
 
+.cast>.slider-list,
+.similar-movies>.slider-list {
+    width: 90%;
+    margin: 0 auto;
+}
+
 .cast-container img:hover,
 .similar-movie-container img:hover {
     filter: brightness(110%);
@@ -118,22 +124,20 @@
 }
 
 /* ============= Video Sliders ============= */
-
-.video-container {
-    margin-left: 15%;
-    margin-bottom: 15%;
+.video-list {
+    width: 50%;
+    margin: 0 auto;
 }
-
 .video-list>button {
-    top: 33%;
+    top: 42%;
 }
 
 .video-list>.slick-next {
-    right: 5%;
+    right: -4vw;
 }
 
 .video-list>.slick-prev {
-    left: 10%;
+    left: -6vw;
 }
 
 /* ============= Slick Slider Styling ============= */

@@ -29,7 +29,7 @@ export default class SimilarMovies extends Component {
                     }
                 },
                 {
-                    breakpoint: 800,
+                    breakpoint: 1000,
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 2,
