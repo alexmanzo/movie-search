@@ -1,15 +1,25 @@
+.results {
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-#results>p {
-    margin-left: 100px;
+.movie-search-info>p {
+    font-size: 18px;
+}
+
+.results-num {
+    font-size: 20px;
+    padding-bottom: 15px;
 }
 
 .movie-card {
+    height: 50vh;
     border: solid 1px #01d277;
     border-radius: 10px;
     width: 80%;
-    margin: 0 auto 10px auto;
-    display: flex;
-    flex-direction: row;
+    margin-bottom: 20px;
 }
 
 .movie-card:hover,
@@ -18,8 +28,16 @@
     background-color: #01d277;
 }
 
+.results-poster,
+.results-no-poster {
+    float: left;
+    margin-right: 2%;
+    border-radius: 10px 0 0 10px;
+    border-right: solid 1px #01d277;
+}
+
 .movie-search-info {
-    padding-right: 2%;
+    padding-right: 2vw;
 }
 
 .results-poster,
@@ -31,48 +49,44 @@
 }
 
 .results-poster {
-    width: 25%;
+    height: 100%;
 }
 
 .results-no-poster {
-    width: 25%;
+    height: 100%;
     background-color: #cbcbcb;
 }
 
-.movie-card > a {
+.movie-card>a {
     text-decoration: none;
     color: #fff;
 }
 
-.movie-card:hover > a {
+.movie-card:hover>a {
     color: #081c24;
 }
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
 
-    #results>p {
-    	margin-top: 25px;
-    	margin-left: 0px;
-    	text-align: center;
-    }
-
     .movie-card {
-        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        height: 100vh;
     }
 
     .results-poster,
     .results-no-poster {
         float: none;
-        display: block;
+        width: 100%;
+        height: auto;
         border-radius: 10px 10px 0 0;
         border-bottom: solid 1px #01d277;
-        width: 100%;
     }
 
     .movie-search-info {
-    	margin-left: 10px;
-    	margin-right: 10px;
-    }
+        flex-basis: 100%;
+    } 
 
 }

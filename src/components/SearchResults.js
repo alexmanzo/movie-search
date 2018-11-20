@@ -25,8 +25,10 @@ export default class SearchResults extends Component {
         ))
 
         return (
-        <section id="results">
-            <p>{ `Your search returned ${ this.props.numberOfResults } results.` }</p>
+        <section id="results" className="results">
+            <div className="results-num">
+                <p>{ `Your search returned ${ this.props.numberOfResults } results.` }</p>
+            </div>
             {results}
         </section>
         )
