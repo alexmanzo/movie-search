@@ -36,3 +36,7 @@ h4 {
     animation: fadein ease-out 1.4s;
 }
 
+.loading {
+    margin-left: 5%;
+}
+

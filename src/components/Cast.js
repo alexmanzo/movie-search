@@ -31,7 +31,7 @@ export default class Cast extends Component {
                     }
                 },
                 {
-                    breakpoint: 1000,
+                    breakpoint: 1050,
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 2,
@@ -47,7 +47,7 @@ export default class Cast extends Component {
                     }
                 }
             ]
-        };
+        }
 
 
         return (

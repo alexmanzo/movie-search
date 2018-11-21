@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
+import './SearchResults.css'
 import { Link } from 'react-router-dom'
+import nophoto from '../nophoto.svg'
 
 export default class GenreResults extends Component {
 
@@ -38,19 +40,19 @@ export default class GenreResults extends Component {
         }
 
         const results = this.props.searchResults.map((movie, index) => (
-
-            <Link to={`/movie/${movie.id}`} key ={index}>
-                <div>
-                    { (movie.poster_path === null) ? (<img src={'https://secure.hmepowerweb.com/Resources/Images/NoImageAvailableLarge.jpg'} alt='no poster found' />) : (<img src={`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`} alt={movie.original_title} />) }
-                    <h4>{movie.original_title}</h4>
-                    <h5>{movie.release_date.substring(0,4)}</h5>
+            <div className="movie-card" key={index}>
+                <Link to={`/movie/${movie.id}`}>
+                { (movie.poster_path === null) ? (<img className="results-no-poster" src={nophoto} alt='no poster found' />) : (<img className="results-poster" src={`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`} alt={movie.original_title} />) }
+                <div className="movie-search-info">
+                    <h1>{movie.original_title} ({movie.release_date.substring(0,4)})</h1>
+                    <p>{movie.overview}</p>
                 </div>
-            </Link>
-
+                </Link>
+            </div>
         ))
 
         return (
-        <section id="results">
+        <section id="results" className="results">
             <p>{ `Your search returned ${ this.props.numberOfResults } results.` }</p>
             {results}
         </section>

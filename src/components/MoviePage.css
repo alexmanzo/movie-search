@@ -27,6 +27,15 @@
     background-color: #cbcbcb;
 }
 
+.movie-page-no-poster {
+    height: 100%;
+    width: 40%;
+    margin-right: 30px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-color: #cbcbcb;
+}
+
 /* Overall Movie Data */
 .movie-data {
     display: flex;
@@ -78,7 +87,6 @@
 
 /* ============= Cast & Similar Movie Sliders ============= */
 
-
 .cast-container,
 .similar-movie-container {
     overflow: hidden;
@@ -127,28 +135,21 @@
 
 /* ============= Video Sliders ============= */
 .video-container>iframe {
-    width: 100vmin;
-    height: 56vmin;
-    position: relative;
-    left: 5%;
+    width: 80vmin;
+    height: 45vmin;
 }
 
 .videos>.video-list {
     width: 75%;
     margin: 0 auto;
+    text-align: center;
 }
 
 .video-list>button {
     top: 42%;
 }
 
-.video-list>.slick-next {
-    right: 0vw;
-}
 
-.video-list>.slick-prev {
-    left: -6vw;
-}
 
 /* ============= Slick Slider Styling ============= */
 .slick-next,
@@ -239,13 +240,21 @@
     pointer-events: none
 }
 
+@media only screen and (max-width: 1090px) {
+    .videos>.video-list {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+
+
 @media only screen and (max-width: 768px) {
     .movie {
         flex-direction: column;
         height: auto;
         text-align: center;
     }
-
 
     .movie-details,
     .movie-plot,
@@ -257,6 +266,12 @@
     .movie-page-poster {
         width: 100%;
         height: auto;
+        margin-right: 0;
+    }
+
+    .movie-page-no-poster {
+        width: 100%;
+        height: 65vh;
         margin-right: 0;
     }
 
@@ -287,23 +302,11 @@
         margin-bottom: -1%;
     }
 
-    .video-container>iframe {
-        width: 85vmin;
-        height: 48vmin;
-        left: 0;
-    }
 
     .videos>.video-list {
         width: 90%;
         margin: 0 auto;
     }
 
-    .video-list>.slick-next {
-        right: -8vw;
-    }
-
-    .video-list>.slick-prev {
-        left: -8vw;
-    }
 
 }

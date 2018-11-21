@@ -1,0 +1,129 @@
+.profile-container {
+    padding: 0 5% 0 5%;
+    width: 90%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    height: 45vh;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.profile-photo {
+    height: 100%;
+    margin-right: 30px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-color: #cbcbcb;
+}
+
+.profile-data {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.profile-name {
+    flex-basis: 100%;
+    margin-bottom: 3vh;
+}
+
+.profile-details {
+	width: 90%;
+}
+
+/* ======= Links ======= */
+
+.filmography-container>a:hover {
+    color: #01d277;
+}
+
+
+.filmography-container>a {
+    text-decoration: none;
+    color: #fff;
+}
+/* ======= Filmography Sliders ======= */
+
+.filmography-container {
+    overflow: hidden;
+    height: 40vh;
+}
+
+.filmography-list {
+    width: 90%;
+    margin: 0 auto;
+    padding-left: 5%;
+}
+
+.filmography-container img:hover {
+    filter: brightness(110%);
+}
+
+.filmography-no-photo {
+    height: 75%;
+    background-color: #cbcbcb;
+}
+
+
+.filmography-title,
+.filmography-year {
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 3%;
+    width: 90%;
+}
+
+@media only screen and (max-width: 768px) {
+	h2 {
+		text-align: center;
+	}
+
+    .profile {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+        width: 90vw;
+    }
+
+    .profile-data,
+    .profile-details {
+        margin: 0 auto;
+        flex-basis: 100%;
+    }
+
+    .profile-photo {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .profile-no-photo {
+        width: 100%;
+        height: 65vh;
+        margin-right: 0;
+    }
+
+    .filmography-list {
+        width: 75vw;
+        text-align: center;
+    }
+
+    .filmography-container {
+        height: 70vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .filmography-title,
+    .filmography-year {
+        width: 90%;
+        margin-left: 2vw;
+    }
+
+}
+
