@@ -2,7 +2,6 @@
 
 .movie-container {
     padding: 0 5% 0 5%;
-    min-width: 850px;
     width: 90%;
     margin: 0 auto;
     display: flex;
@@ -13,15 +12,15 @@
 
 /* container */
 .movie {
+    display: flex;
+    flex-direction: row;
     height: 45vh;
     margin-top: 30px;
     margin-bottom: 25px;
-    overflow: auto;
 }
 
 .movie-page-poster {
     height: 100%;
-    float: left;
     margin-right: 30px;
     border-radius: 10px;
     border: 1px solid #fff;
@@ -36,6 +35,7 @@
 
 .movie-headline {
     flex-basis: 100%;
+    margin-bottom: -5vh;
 }
 
 /* Details & Plot */
@@ -77,6 +77,8 @@
 
 
 /* ============= Cast & Similar Movie Sliders ============= */
+
+
 .cast-container,
 .similar-movie-container {
     overflow: hidden;
@@ -124,16 +126,24 @@
 }
 
 /* ============= Video Sliders ============= */
-.video-list {
-    width: 50%;
+.video-container>iframe {
+    width: 100vmin;
+    height: 56vmin;
+    position: relative;
+    left: 5%;
+}
+
+.videos>.video-list {
+    width: 75%;
     margin: 0 auto;
 }
+
 .video-list>button {
     top: 42%;
 }
 
 .video-list>.slick-next {
-    right: -4vw;
+    right: 0vw;
 }
 
 .video-list>.slick-prev {
@@ -229,3 +239,71 @@
     pointer-events: none
 }
 
+@media only screen and (max-width: 768px) {
+    .movie {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
+
+
+    .movie-details,
+    .movie-plot,
+    .movie-headline {
+        margin: 0 auto;
+        flex-basis: 100%;
+    }
+
+    .movie-page-poster {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .cast,
+    .similar-movies,
+    .videos,
+    .movie {
+        width: 90vw;
+        text-align: center;
+    }
+
+    .cast-container,
+    .similar-movie-container {
+        height: 65vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .actor,
+    .character,
+    .similar-movie-title {
+        width: 90%;
+        padding-left: 3vw;
+    }
+
+    .actor,
+    .similar-movie-title {
+        margin-bottom: -1%;
+    }
+
+    .video-container>iframe {
+        width: 85vmin;
+        height: 48vmin;
+        left: 0;
+    }
+
+    .videos>.video-list {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .video-list>.slick-next {
+        right: -8vw;
+    }
+
+    .video-list>.slick-prev {
+        left: -8vw;
+    }
+
+}
