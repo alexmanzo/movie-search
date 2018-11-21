@@ -12,6 +12,7 @@
     height: 45vh;
     margin-top: 30px;
     margin-bottom: 50px;
+    overflow: auto;
 }
 
 .profile-photo {
