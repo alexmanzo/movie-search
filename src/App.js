@@ -7,6 +7,7 @@ import Header from './components/Header'
 import MoviePage from './components/MoviePage'
 import SearchError from './components/SearchError'
 import SearchResults from './components/SearchResults'
+require('dotenv').config()
 
 export default class App extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ export default class App extends Component {
         super(props)
 
         this.state = {
+            apiKey: process.env.REACT_APP_API_KEY,
             numberOfResults: 0,
             searchResults: []
         }
@@ -30,7 +32,8 @@ export default class App extends Component {
         document.body.style.backgroundImage = ''
 
         // AJAX call searching via movie title.
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8541c092938098d21b11f58a14dd114e&language=en&query=${searchTerm}`)
+        const apiKey = this.state.apiKey
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${searchTerm}`)
             .then(res => {
                 this.setState({
                     numberOfResults: res.data.total_results,
@@ -50,7 +53,8 @@ export default class App extends Component {
         document.body.style.backgroundImage = ''
 
         // AJAX searching movies by genre. Returns movies with >5000 votes on TMDb sorted by vote average 
-        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${genreId}`)
+        const apiKey = this.state.apiKey
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${genreId}`)
             .then(res => {
                 this.setState({
                     numberOfResults: res.data.total_results,
@@ -70,13 +74,14 @@ export default class App extends Component {
         document.body.style.backgroundImage = ''
 
         // AJAX searching by cast ID. Returns movie they appeared in sorted by release date (newest => oldset)
+        const apiKey = this.state.apiKey
         function getFilmography() {
-            return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=8541c092938098d21b11f58a14dd114e&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&with_cast=${castId}&with_original_language=en`)
+            return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&with_cast=${castId}&with_original_language=en`)
         }
 
         // AJAX searching for bio by cast ID.
         function getBio() {
-            return axios.get(`https://api.themoviedb.org/3/person/${castId}?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
+            return axios.get(`https://api.themoviedb.org/3/person/${castId}?api_key=${apiKey}&language=en-US`)
         }
 
         axios.all([getFilmography(), getBio()])
@@ -96,22 +101,23 @@ export default class App extends Component {
 
     // Retrives movie infomation, cast, videos, and similar movies.
     getMovieById(id) {
+        const apiKey = this.state.apiKey
         function getMovieDetails() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`)
         }
 
         function getMovieCast() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`)
 
         }
 
         function getVideos() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`)
 
         }
 
         function getSimilarMovies() {
-            return axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=8541c092938098d21b11f58a14dd114e&language=en-US`)
+            return axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=en-US`)
 
         }
 
