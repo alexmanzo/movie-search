@@ -18,6 +18,11 @@
     padding-bottom: 15px;
 }
 
+.results-err {
+    font-size: 2vmax;
+    text-align: center;
+}
+
 .movie-card {
     height: 50vh;
     border: solid 1px #01d277;
