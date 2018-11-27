@@ -19,8 +19,8 @@ export default class movieDetails extends Component {
 							<h4>{movieData.tagline}</h4>
 						</div>
 						<div className="movie-details">
-						{ (movieData.budget === 0) ? (<p><strong>Budget</strong><br />N/A</p>) : (<p><strong>Budget</strong><br />{movieData.budget.toLocaleString()}</p>) }
-						{ (movieData.revenue === 0) ? (<p><strong>Revenue</strong><br />N/A</p>) : (<p><strong>Revenue</strong><br />{movieData.revenue.toLocaleString()}</p>) }
+						{ (movieData.budget === 0) ? (<p><strong>Budget</strong><br />N/A</p>) : (<p><strong>Budget</strong><br />${movieData.budget.toLocaleString()}</p>) }
+						{ (movieData.revenue === 0) ? (<p><strong>Revenue</strong><br />N/A</p>) : (<p><strong>Revenue</strong><br />${movieData.revenue.toLocaleString()}</p>) }
 						{ (movieData.runtime === null) ? (<p><strong>Runtime</strong><br />N/A</p>) : (<p><strong>Runtime</strong><br />{movieData.runtime} minutes</p>)}
 						<div className="genres"><p><strong>Genres</strong><br />
 								{movieData.genres.map((genre, index) => (

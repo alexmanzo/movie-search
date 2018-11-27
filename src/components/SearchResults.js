@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Loading from './Loading'
 import { Link } from 'react-router-dom'
 import './SearchResults.css'
 import nophoto from '../nophoto.svg'
@@ -7,11 +6,6 @@ import nophoto from '../nophoto.svg'
 export default class SearchResults extends Component {
 
     render() {
-
-        if (this.props.numberOfResults === 0) {
-            return <Loading />
-        }
-
         const results = this.props.searchResults.map((movie, index) => (
             <div className="movie-card" key={index}>
                 <Link to={`/movie/${movie.id}`}>

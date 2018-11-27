@@ -17,11 +17,12 @@ export default class App extends Component {
         this.state = {
             apiKey: process.env.REACT_APP_API_KEY,
             numberOfResults: 0,
-            searchResults: []
+            searchResults: [],
+            searching: false
         }
     }
-
-    getSearchResults(searchTerm) {
+    
+    async getSearchResults(searchTerm) {
         // Reset state before AJAX call. Prevents page loading with what was in component previously before displaying new content.
         this.setState({
             numberOfResults: 0,
@@ -33,16 +34,21 @@ export default class App extends Component {
 
         // AJAX call searching via movie title.
         const apiKey = this.state.apiKey
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${searchTerm}`)
-            .then(res => {
-                this.setState({
-                    numberOfResults: res.data.total_results,
-                    searchResults: res.data.results,
-                })
+        try {
+             let res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${searchTerm}`)
+             this.setState({
+                searching: true,
+                numberOfResults: await res.data.total_results,
+                searchResults: await res.data.results,
             })
+        } catch (err) {
+            console.log(err)
+            return <SearchError />
+        }
+
     }
 
-    getMoviesByGenre(genreId) {
+    async getMoviesByGenre(genreId) {
 
         // Reset state before AJAX call. Prevents page loading with what was in component previously before displaying new content.
         this.setState({
@@ -54,16 +60,19 @@ export default class App extends Component {
 
         // AJAX searching movies by genre. Returns movies with >5000 votes on TMDb sorted by vote average 
         const apiKey = this.state.apiKey
-        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${genreId}`)
-            .then(res => {
-                this.setState({
-                    numberOfResults: res.data.total_results,
-                    searchResults: res.data.results,
-                })
+        try {
+            let res = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${genreId}`)
+            this.setState({
+                numberOfResults: await res.data.total_results,
+                searchResults: await res.data.results,
             })
+        } catch (err) {
+            console.log(err)
+            return <SearchError />
+        }
     }
 
-    getCastProfile(castId) {
+    async getCastProfile(castId) {
 
         // Reset state before AJAX call. Prevents page loading with what was in component previously before displaying new content.
         this.setState({
@@ -83,24 +92,28 @@ export default class App extends Component {
         function getBio() {
             return axios.get(`https://api.themoviedb.org/3/person/${castId}?api_key=${apiKey}&language=en-US`)
         }
+        
+        try {
+            const [filmography, bio] = await Promise.all([getFilmography(), getBio()])
+            this.setState({
+                numberOfResults: filmography.data.total_results,
+                filmography: filmography.data.results,
+                castId: bio.data.id,
+                birthday: bio.data.birthday,
+                deathday: bio.data.deathday,
+                castName: bio.data.name,
+                bio: bio.data.biography,
+                castPhoto_path: bio.data.profile_path
+            })
+        } catch (err) {
+            console.log(err)
+            return <SearchError />
+        }
 
-        axios.all([getFilmography(), getBio()])
-            .then(axios.spread((filmography, bio) => {
-                this.setState({
-                    numberOfResults: filmography.data.total_results,
-                    filmography: filmography.data.results,
-                    castId: bio.data.id,
-                    birthday: bio.data.birthday,
-                    deathday: bio.data.deathday,
-                    castName: bio.data.name,
-                    bio: bio.data.biography,
-                    castPhoto_path: bio.data.profile_path
-                })
-            }))
     }
 
     // Retrives movie infomation, cast, videos, and similar movies.
-    getMovieById(id) {
+    async getMovieById(id) {
         const apiKey = this.state.apiKey
         function getMovieDetails() {
             return axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`)
@@ -126,33 +139,36 @@ export default class App extends Component {
             title: null
         })
 
-        axios.all([getMovieDetails(), getMovieCast(), getVideos(), getSimilarMovies()])
-            .then(axios.spread((details, cast, videos, similarMovies) => {
-                this.setState({
-                    searchResults: [],
-                    movieId: details.data.id,
-                    title: details.data.original_title,
-                    poster_path: details.data.poster_path,
-                    backdrop_path: details.data.backdrop_path,
-                    budget: details.data.budget,
-                    revenue: details.data.revenue,
-                    genres: details.data.genres,
-                    overview: details.data.overview,
-                    tagline: details.data.tagline,
-                    release_date: details.data.release_date,
-                    runtime: details.data.runtime,
-                    cast: cast.data.cast,
-                    videos: videos.data.results,
-                    similarMovies: similarMovies.data.results
-                })
+        try {
+            const [details, cast, videos, similarMovies] = await Promise.all([getMovieDetails(), getMovieCast(), getVideos(), getSimilarMovies()])
+            this.setState({
+                searchResults: [],
+                movieId: details.data.id,
+                title: details.data.original_title,
+                poster_path: details.data.poster_path,
+                backdrop_path: details.data.backdrop_path,
+                budget: details.data.budget,
+                revenue: details.data.revenue,
+                genres: details.data.genres,
+                overview: details.data.overview,
+                tagline: details.data.tagline,
+                release_date: details.data.release_date,
+                runtime: details.data.runtime,
+                cast: cast.data.cast,
+                videos: videos.data.results,
+                similarMovies: similarMovies.data.results
+            })
+            
+            if (window.innerWidth > 910) {
+                document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
+            }
+        } catch (err) {
+            console.log(err)
+            return <SearchError / >
+        }
 
-                if (window.innerWidth > 910) {
-                    document.body.style.backgroundImage = `url('https://image.tmdb.org/t/p/original${details.data.backdrop_path}`
-                }
 
-            }))
-    }
-
+        }
 
     render() {
         const { searchResults, numberOfResults, filmography } = this.state
