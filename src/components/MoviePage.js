@@ -48,8 +48,8 @@ export default class MoviePage extends Component {
             <div className="movie-container">
                 <MovieDetails data={ data } />
                 <Cast castData={ castData }/>
-                <SimilarMovies similarMovieData={ similarMovieData } />
-                <Videos videoData={ videoData }/>
+                { (similarMovieData.length === 0) ? (null) : (<SimilarMovies similarMovieData={ similarMovieData } /> )}
+                { (videoData.length === 0) ? (null) : (<Videos videoData={ videoData }/>) }
             </div>
         )
     }

@@ -21,7 +21,7 @@ export default class movieDetails extends Component {
 						<div className="movie-details">
 						{ (movieData.budget === 0) ? (<p><strong>Budget</strong><br />N/A</p>) : (<p><strong>Budget</strong><br />{movieData.budget.toLocaleString()}</p>) }
 						{ (movieData.revenue === 0) ? (<p><strong>Revenue</strong><br />N/A</p>) : (<p><strong>Revenue</strong><br />{movieData.revenue.toLocaleString()}</p>) }
-						<p><strong>Runtime</strong><br />{movieData.runtime} minutes</p>
+						{ (movieData.runtime === null) ? (<p><strong>Runtime</strong><br />N/A</p>) : (<p><strong>Runtime</strong><br />{movieData.runtime} minutes</p>)}
 						<div className="genres"><p><strong>Genres</strong><br />
 								{movieData.genres.map((genre, index) => (
 								<span key={index} className="genre-link"><Link to={`/genre/${genre.id}-${genre.name}`}>{genre.name}</Link> </span>   

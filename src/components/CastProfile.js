@@ -96,9 +96,9 @@ export default class castProfile extends Component {
                     <div className="profileData">
                         <h1 className="profile-name">{ this.props.bioData.castName }</h1>
                         <div className="profile-details">
-                            <p><strong>Date of Birth:</strong><br /><Moment format="MMMM Do, YYYY">{this.props.bioData.birthday}</Moment></p>
+                            { (this.props.bioData.birthday === null) ? (null) : (<p><strong>Date of Birth:</strong><br /><Moment format="MMMM Do, YYYY">{this.props.bioData.birthday}</Moment></p>) }
                             { (this.props.bioData.deathday === null) ? (null) : (<p><strong>Date of Death:</strong><br /> { <Moment format="MMMM Do, YYYY">{this.props.bioData.deathday}</Moment> }</p>) }
-                            <p><strong>Biography</strong><br />{ this.props.bioData.bio }</p>
+                            <p><strong>Biography</strong><br />{ (this.props.bioData.bio === "") ? ('No biography available.') : (this.props.bioData.bio)  }</p>
                         </div>
                     </div>
                 </div>
