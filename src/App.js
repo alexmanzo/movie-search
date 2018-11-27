@@ -17,8 +17,7 @@ export default class App extends Component {
         this.state = {
             apiKey: process.env.REACT_APP_API_KEY,
             numberOfResults: 0,
-            searchResults: [],
-            searching: false
+            searchResults: []
         }
     }
     
@@ -38,8 +37,8 @@ export default class App extends Component {
              let res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${searchTerm}`)
              this.setState({
                 searching: true,
-                numberOfResults: await res.data.total_results,
-                searchResults: await res.data.results,
+                numberOfResults: res.data.total_results,
+                searchResults: res.data.results,
             })
         } catch (err) {
             console.log(err)
