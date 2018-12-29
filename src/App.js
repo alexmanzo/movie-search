@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import CastProfile from './components/CastProfile'
 import GenreResults from './components/GenreResults'
+import Footer from './components/Footer'
 import Header from './components/Header'
 import MoviePage from './components/MoviePage'
 import SearchError from './components/SearchError'
@@ -181,6 +182,7 @@ export default class App extends Component {
                 <Route exact path="/genre/:id-:name" render={ props => <GenreResults searchResults={ searchResults } numberOfResults={ numberOfResults } onMount={ genreId => this.getMoviesByGenre(genreId) } {...props} /> } />
                 <Route exact path="/movie/:id" render={ props => <MoviePage data={ this.state } onMount={ id => this.getMovieById(id)} {...props}/> } />
                 <Route exact path="/cast/:id-:name" render={ props => <CastProfile filmography={ filmography } bioData={ this.state } onMount={ id => this.getCastProfile(id) } {...props}/> } />
+                <Footer />
             </main>
             </Router>
         )
